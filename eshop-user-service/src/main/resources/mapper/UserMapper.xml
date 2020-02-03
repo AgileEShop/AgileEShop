@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.atguigu.gmall.user.mapper.UserMapper">
+<mapper namespace="cn.nju.edu.eshop.user.mapper.UserMapper">
 
     <select id="selectAllUser" resultType="cn.nju.edu.eshop.bean.User">
         select t.*  from user t
