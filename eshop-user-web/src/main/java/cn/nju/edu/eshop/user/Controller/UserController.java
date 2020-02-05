@@ -3,8 +3,8 @@ package cn.nju.edu.eshop.user.Controller;
 import cn.nju.edu.eshop.bean.User;
 import cn.nju.edu.eshop.bean.UserReceiveAddress;
 import cn.nju.edu.eshop.service.UserService;
-import org.springframework.stereotype.Controller;
 import com.alibaba.dubbo.config.annotation.Reference;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
