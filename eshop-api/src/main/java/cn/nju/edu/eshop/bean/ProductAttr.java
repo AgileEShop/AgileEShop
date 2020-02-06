@@ -11,7 +11,7 @@ public class ProductAttr {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
     @Column
-    private String productId;
+    private String productCatalog3Id;
     @Column
     private String property;
     @Column
