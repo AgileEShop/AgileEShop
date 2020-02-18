@@ -26,9 +26,9 @@ public class Product implements Serializable {
     private int userId;
 
     @Column
-    private int productCatalog1Id;
+    private int catalog1Id;
     @Column
-    private int productCatalog2Id;
+    private int catalog2Id;
 
     @Column
     private String title;
