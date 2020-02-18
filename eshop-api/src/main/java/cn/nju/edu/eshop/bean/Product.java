@@ -16,21 +16,32 @@ import java.sql.Timestamp;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class User implements Serializable {
+public class Product implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
     @Column
-    private String username;
+    private int userId;
+
     @Column
-    private String password;
+    private int catalog1Id;
     @Column
-    private String nickname;
+    private int catalog2Id;
+
     @Column
-    private String phone;
+    private String title;
+
     @Column
-    private int status;
+    private double price;
+    @Column
+    private String place;//发货地
+    @Column
+    private double fee;//快递费
+
+    @Column
+    private String urls;//图片列表
 
     @Column
     private Timestamp createTime;

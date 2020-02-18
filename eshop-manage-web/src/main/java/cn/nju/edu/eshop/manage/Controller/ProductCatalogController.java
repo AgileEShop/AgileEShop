@@ -2,7 +2,6 @@ package cn.nju.edu.eshop.manage.Controller;
 
 import cn.nju.edu.eshop.bean.ProductCatalog1;
 import cn.nju.edu.eshop.bean.ProductCatalog2;
-import cn.nju.edu.eshop.bean.ProductCatalog3;
 import cn.nju.edu.eshop.service.ProductCatalogService;
 import com.alibaba.dubbo.config.annotation.Reference;
 import org.springframework.stereotype.Controller;
@@ -17,12 +16,6 @@ import java.util.List;
 public class ProductCatalogController {
     @Reference
     ProductCatalogService productCatalogService;
-
-    @RequestMapping("getProductCatalog3")
-    @ResponseBody
-    public List<ProductCatalog3> getProductCatalog3(String productCatalog2Id){
-        return productCatalogService.getProductCatalog3(productCatalog2Id);
-    }
 
     @RequestMapping("getProductCatalog2")
     @ResponseBody
