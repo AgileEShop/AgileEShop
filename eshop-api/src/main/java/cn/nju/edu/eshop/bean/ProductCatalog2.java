@@ -22,6 +22,6 @@ public class ProductCatalog2 implements Serializable {
     private String name;
 
     @Column
-    private String productCatalog1Id;
+    private String catalog1Id;
 
 }
