@@ -21,7 +21,6 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     public List<ProductCatalog1> getProductCatalog1() {
         return productCatalog1Mapper.selectAll();
     }
-
     @Override
     public List<ProductCatalog2> getProductCatalog2(String productCatalog1Id) {
         ProductCatalog2 productCatalog2 = new ProductCatalog2();
