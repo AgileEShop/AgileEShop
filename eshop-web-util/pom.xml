@@ -5,19 +5,20 @@
     <modelVersion>4.0.0</modelVersion>
 
 
-    <artifactId>eshop-web-util</artifactId>
+    <artifactId>eshop-web-cn.nju.edu.eshop.util</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <parent>
         <groupId>cn.nju.edu.eshop</groupId>
         <artifactId>eshop-parent</artifactId>
         <version>1.0-SNAPSHOT</version>
+        <relativePath>../eshop-parent/pom.xml</relativePath>
     </parent>
 
     <dependencies>
         <dependency>
             <groupId>cn.nju.edu.eshop</groupId>
-            <artifactId>eshop-common-util</artifactId>
+            <artifactId>eshop-common-cn.nju.edu.eshop.util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
 

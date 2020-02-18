@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserService {
     List<User> getAllUser();
     List<UserReceiveAddress> getReceiveAddressByUserId(String userId);
+    User login(User user);
+    void addUserToken(String token,String userid);
 }
