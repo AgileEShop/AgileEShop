@@ -25,7 +25,7 @@ public class ProductCatalogServiceImpl implements ProductCatalogService {
     public List<ProductCatalog2> getProductCatalog2(String productCatalog1Id) {
         ProductCatalog2 productCatalog2 = new ProductCatalog2();
 //        productCatalog2.setProductCatalog1Id(productCatalog1Id);
-        return productCatalog2Mapper.select(productCatalog2);
+        return productCatalog2Mapper.selectAll();
     }
 
 }

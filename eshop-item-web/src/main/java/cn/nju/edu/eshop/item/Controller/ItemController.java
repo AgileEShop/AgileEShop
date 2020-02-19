@@ -15,7 +15,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@CrossOrigin
 public class ItemController {
     @Reference
     ProductService productService;
@@ -27,7 +26,7 @@ public class ItemController {
 //        String header = request.getHeader("");//使用nginx负载均衡的算法，获取用户的IP地址
         System.err.println(productId);
         Product product = productService.getProductById(productId);
-//        System.out.println(product.toString());
+        System.err.println("toString:"+product.toString());
 //        map.put("product",product);
 //        return "item";
         return product;

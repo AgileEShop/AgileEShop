@@ -3,11 +3,13 @@ package cn.nju.edu.eshop.manage.service.impl;
 import cn.nju.edu.eshop.bean.Product;
 import cn.nju.edu.eshop.manage.mapper.ProductMapper;
 import cn.nju.edu.eshop.service.ProductService;
+import com.alibaba.dubbo.config.annotation.Service;
 import org.springframework.beans.factory.annotation.Autowired;
 import tk.mybatis.mapper.entity.Example;
 
 import java.util.List;
 
+@Service
 public class ProductServiceImpl implements ProductService {
     @Autowired
     ProductMapper productMapper;
