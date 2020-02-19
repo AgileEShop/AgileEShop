@@ -39,34 +39,40 @@ public class PassportController {
 
 //    @RequestMapping("login")
 //    @ResponseBody
-//    public String login(User user, HttpServletRequest request) {
-//        String token = "";
-//        User userLogin = userService.login(user);
-//        if (userLogin != null) {
-//            // 登录成功, 用jwt制作token ， 将token存入redis
-//            // 在web-util中有一个jwt加密算法，定义了一个map<String , Object>
-//            int userId = userLogin.getId();
-//            String nickname = userLogin.getNickname();
-//            Map<String, Object> userMap = new HashMap<>();
-//            userMap.put("userId", userId);
-//            userMap.put("nickname", nickname);
-//            String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
-//            if (StringUtils.isBlank(ip)) {
-//                ip = request.getRemoteAddr();//从request中获取ip
-//                if (StringUtils.isBlank(ip)) {
-//                    ip = "127.0.0.1";
-//                }
-//            }
-//            // 按照设计的算法对参数进行加密后，生成token
-//            token = JwtUtil.encode("agileeshop", userMap, ip);
-//            // 将token存入redis一份
-//            userService.addUserToken(token, userId);
-//        } else {
-//            // 登录失败
-//            token = "fail";
-//        }
-//        return token;
+//    public String login(User user, HttpServletRequest request){
+//    如果下面的那个单点登录login方法无法正常运行，那么直接在这个方法里写一个简单的登录
 //    }
+
+    @RequestMapping("login")
+    @ResponseBody
+    public String login(User user, HttpServletRequest request) {
+        String token = "";
+        User userLogin = userService.login(user);
+        if (userLogin != null) {
+            // 登录成功, 用jwt制作token ， 将token存入redis
+            // 在web-util中有一个jwt加密算法，定义了一个map<String , Object>
+            String userId = userLogin.getId();
+            String nickname = userLogin.getNickname();
+            Map<String, Object> userMap = new HashMap<>();
+            userMap.put("userId", userId);
+            userMap.put("nickname", nickname);
+            String ip = request.getHeader("x-forwarded-for");// 通过nginx转发的客户端ip
+            if (StringUtils.isBlank(ip)) {
+                ip = request.getRemoteAddr();//从request中获取ip
+                if (StringUtils.isBlank(ip)) {
+                    ip = "127.0.0.1";
+                }
+            }
+            // 按照设计的算法对参数进行加密后，生成token
+            token = JwtUtil.encode("agileeshop", userMap, ip);
+            // 将token存入redis一份
+            userService.addUserToken(token, userId);
+        } else {
+            // 登录失败
+            token = "fail";
+        }
+        return token;
+    }
 
     @RequestMapping("index")
     public String index(String ReturnUrl, ModelMap map) {

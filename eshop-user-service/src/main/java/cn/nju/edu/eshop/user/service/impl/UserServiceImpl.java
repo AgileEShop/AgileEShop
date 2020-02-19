@@ -11,6 +11,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import redis.clients.jedis.Jedis;
 import cn.nju.edu.eshop.util.RedisUtil;
+import tk.mybatis.mapper.entity.Example;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -62,21 +63,31 @@ public class UserServiceImpl implements UserService {
         jedis.close();
     }
 
+    @Override
+    public User getOneUser() {
+        Example example = new Example(User.class);
+        Example.Criteria criteria= example.createCriteria();
+        criteria.andEqualTo("id",1);
+        User user = userMapper.selectOneByExample(example);
+        System.out.println(user.toString());
+        return user;
+    }
+
     private User loginFromDb(User user) {
-//        List<User> userList = userMapper.select(user);
-//        if(userList!=null){
-//            return userList.get(0);
-//        }
-//        return null;
-        User newUser = new User();
-        newUser.setId("000001");
-        newUser.setPassword("123456");
-        newUser.setNickname("aaaaaa");
-        newUser.setPhone("111111");
-        newUser.setStatus(0);
-        newUser.setUsername("abcdef");
-        newUser.setCreateTime(new Date(2018, Calendar.FEBRUARY, 1));
-        newUser.setModifyTime(new Date(2019, Calendar.FEBRUARY, 1));
-        return newUser;
+        List<User> userList = userMapper.select(user);
+        if(userList!=null){
+            return userList.get(0);
+        }
+        return null;
+//        User newUser = new User();
+//        newUser.setId("000001");
+//        newUser.setPassword("123456");
+//        newUser.setNickname("aaaaaa");
+//        newUser.setPhone("111111");
+//        newUser.setStatus(0);
+//        newUser.setUsername("abcdef");
+//        newUser.setCreateTime(new Date(2018, Calendar.FEBRUARY, 1));
+//        newUser.setModifyTime(new Date(2019, Calendar.FEBRUARY, 1));
+//        return newUser;
     }
 }

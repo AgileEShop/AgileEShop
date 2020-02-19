@@ -11,7 +11,7 @@
         <relativePath>../eshop-parent/pom.xml</relativePath>
     </parent>
 
-    <artifactId>eshop-common-cn.nju.edu.eshop.util</artifactId>
+    <artifactId>eshop-common-util</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <dependencies>

@@ -5,7 +5,7 @@
 <mapper namespace="cn.nju.edu.eshop.user.mapper.UserMapper">
 
     <select id="selectAllUser" resultType="cn.nju.edu.eshop.bean.User">
-        select t.*  from user t
+        SELECT * FROM `user`
     </select>
 
 </mapper>

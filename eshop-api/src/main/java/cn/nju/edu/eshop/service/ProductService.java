@@ -1,12 +1,13 @@
 package cn.nju.edu.eshop.service;
 
-import jdk.nashorn.internal.ir.annotations.Reference;
-import org.springframework.stereotype.Controller;
+import cn.nju.edu.eshop.bean.Product;
 
-@Controller
-public class ProductService {
-    @Reference
-    ProductService productService;
+import java.util.List;
+
+public interface ProductService {
+    List<Product> productList(String productCatalog2Id);
+    void saveProduct(Product product);
+    Product getProductById(String productId);
 
 
 }

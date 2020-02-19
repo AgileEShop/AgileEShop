@@ -27,6 +27,12 @@ public class UserController {
         return userService.getAllUser();
     }
 
+    @RequestMapping("getOneUser")
+    @ResponseBody
+    public User getOneUser(){
+        return userService.getOneUser();
+    }
+
     @RequestMapping("index")
     @ResponseBody
     public String index(){

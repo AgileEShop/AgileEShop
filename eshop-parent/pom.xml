@@ -40,13 +40,21 @@
     </properties>
 
     <modules>
-        <module>../eshop-common-cn.nju.edu.eshop.util</module>
-        <module>../eshop-service-cn.nju.edu.eshop.util</module>
-        <module>../eshop-web-cn.nju.edu.eshop.util</module>
+        <module>../eshop-common-util</module>
+        <module>../eshop-item-web</module>
         <module>../eshop-manage-service</module>
         <module>../eshop-manage-web</module>
+        <module>../eshop-passport-web</module>
+        <module>../eshop-redisson-test</module>
+        <module>../eshop-search-service</module>
+        <module>../eshop-search-web</module>
+        <module>../eshop-service-util</module>
         <module>../eshop-user-service</module>
         <module>../eshop-user-web</module>
+        <module>../eshop-web-util</module>
+
+
+
     </modules>
 
     <dependencyManagement>

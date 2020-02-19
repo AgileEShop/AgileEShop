@@ -20,7 +20,7 @@
     <dependencies>
         <dependency>
             <groupId>cn.nju.edu.eshop</groupId>
-            <artifactId>eshop-web-cn.nju.edu.eshop.util</artifactId>
+            <artifactId>eshop-web-util</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
