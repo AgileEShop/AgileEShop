@@ -65,6 +65,9 @@ public class PassportController {
             }
             // 按照设计的算法对参数进行加密后，生成token
             token = JwtUtil.encode("agileeshop", userMap, ip);
+            System.err.println(token);
+
+
             // 将token存入redis一份
             userService.addUserToken(token, userId);
         } else {
