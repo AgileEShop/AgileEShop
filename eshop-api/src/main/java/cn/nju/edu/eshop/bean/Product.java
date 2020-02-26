@@ -7,6 +7,7 @@ package cn.nju.edu.eshop.bean;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.sql.Timestamp;
 
 //@Data
@@ -19,21 +20,21 @@ public class Product implements Serializable {
     @Id
     @Column
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private String id;
 
     @Column
-    private int userId;
+    private String userId;
 
     @Column
-    private int catalog1Id;
+    private String catalog1Id;
     @Column
-    private int catalog2Id;
+    private String catalog2Id;
 
     @Column
     private String title;
 
     @Column
-    private double price;
+    private BigDecimal price;
     @Column
     private String place;//发货地
     @Column
@@ -60,35 +61,35 @@ public class Product implements Serializable {
 //        this.modifyTime = modifyTime;
 //    }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public int getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(int userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
-    public int getCatalog1Id() {
+    public String getCatalog1Id() {
         return catalog1Id;
     }
 
-    public void setCatalog1Id(int catalog1Id) {
+    public void setCatalog1Id(String catalog1Id) {
         this.catalog1Id = catalog1Id;
     }
 
-    public int getCatalog2Id() {
+    public String getCatalog2Id() {
         return catalog2Id;
     }
 
-    public void setCatalog2Id(int catalog2Id) {
+    public void setCatalog2Id(String catalog2Id) {
         this.catalog2Id = catalog2Id;
     }
 
@@ -100,11 +101,11 @@ public class Product implements Serializable {
         this.title = title;
     }
 
-    public double getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(double price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
     }
 

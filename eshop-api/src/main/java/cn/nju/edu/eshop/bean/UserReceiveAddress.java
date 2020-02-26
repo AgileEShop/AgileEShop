@@ -18,15 +18,12 @@ public class UserReceiveAddress implements Serializable {
     private String userId;
     private String name;
     private String phoneNumber;
-    private String place;
-
-//    public UserReceiveAddress(int id, String userId, String name, String phoneNumber, String place) {
-//        this.id = id;
-//        this.userId = userId;
-//        this.name = name;
-//        this.phoneNumber = phoneNumber;
-//        this.place = place;
-//    }
+    private int defaultStatus;
+    private String postCode;
+    private String province;
+    private String city;
+    private String region;
+    private String detailAddress;
 
     public int getId() {
         return id;
@@ -60,22 +57,51 @@ public class UserReceiveAddress implements Serializable {
         this.phoneNumber = phoneNumber;
     }
 
-    public String getPlace() {
-        return place;
+    public int getDefaultStatus() {
+        return defaultStatus;
     }
 
-    public void setPlace(String place) {
-        this.place = place;
+    public void setDefaultStatus(int defaultStatus) {
+        this.defaultStatus = defaultStatus;
     }
 
-    @Override
-    public String toString() {
-        return "UserReceiveAddress{" +
-                "id=" + id +
-                ", userId='" + userId + '\'' +
-                ", name='" + name + '\'' +
-                ", phoneNumber='" + phoneNumber + '\'' +
-                ", place='" + place + '\'' +
-                '}';
+    public String getPostCode() {
+        return postCode;
+    }
+
+    public void setPostCode(String postCode) {
+        this.postCode = postCode;
+    }
+
+    public String getProvince() {
+        return province;
+    }
+
+    public void setProvince(String province) {
+        this.province = province;
+    }
+
+    public String getCity() {
+        return city;
+    }
+
+    public void setCity(String city) {
+        this.city = city;
+    }
+
+    public String getRegion() {
+        return region;
+    }
+
+    public void setRegion(String region) {
+        this.region = region;
+    }
+
+    public String getDetailAddress() {
+        return detailAddress;
+    }
+
+    public void setDetailAddress(String detailAddress) {
+        this.detailAddress = detailAddress;
     }
 }

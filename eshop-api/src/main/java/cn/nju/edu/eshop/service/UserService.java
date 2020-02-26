@@ -11,4 +11,5 @@ public interface UserService {
     User login(User user);
     void addUserToken(String token,String userid);
     User getOneUser();
+    UserReceiveAddress getReceiveAddressById(String receiveAddress);
 }

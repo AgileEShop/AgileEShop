@@ -3,6 +3,7 @@ package cn.nju.edu.eshop.search.service.impl;
 import cn.nju.edu.eshop.bean.Product;
 import cn.nju.edu.eshop.bean.ProductSearchParam;
 import cn.nju.edu.eshop.service.SearchService;
+import com.alibaba.dubbo.config.annotation.Service;
 import io.searchbox.client.JestClient;
 import io.searchbox.core.Search;
 import io.searchbox.core.SearchResult;
@@ -16,7 +17,6 @@ import org.elasticsearch.search.builder.SearchSourceBuilder;
 import org.elasticsearch.search.highlight.HighlightBuilder;
 import org.elasticsearch.search.sort.SortOrder;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
 
 import java.io.IOError;
 import java.io.IOException;
