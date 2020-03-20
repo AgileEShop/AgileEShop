@@ -28,7 +28,7 @@ public class PassportController {
         Map<String, String> map = new HashMap<>();
         Map<String, Object> decode = JwtUtil.decode(token, "agileeshop", currentIp);
         if (decode != null) {
-//            map.put("status", "success");
+            map.put("status", "success");
             map.put("userId", (String) decode.get("userId"));
             map.put("nickname", (String) decode.get("nickname"));
         } else {
@@ -49,6 +49,7 @@ public class PassportController {
         String token = "";
         User userLogin = userService.login(user);
         if (userLogin != null) {
+            System.err.println("login success");
             // 登录成功, 用jwt制作token ， 将token存入redis
             // 在web-util中有一个jwt加密算法，定义了一个map<String , Object>
             String userId = userLogin.getId();
@@ -65,7 +66,7 @@ public class PassportController {
             }
             // 按照设计的算法对参数进行加密后，生成token
             token = JwtUtil.encode("agileeshop", userMap, ip);
-            System.err.println(token);
+            System.err.println("token:"+token);
 
 
             // 将token存入redis一份

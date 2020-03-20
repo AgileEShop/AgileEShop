@@ -41,6 +41,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public User login(User user) {
         //passport认证中心
+        System.err.println("login");
         try (Jedis jedis = redisUtil.getJedis()) {
             if (jedis != null) {
                 String userStr = jedis.get("user:" + user.getPassword() + ":info");
@@ -58,6 +59,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void addUserToken(String token, String userId) {
+        System.err.println("add user token");
         Jedis jedis = redisUtil.getJedis();
         jedis.setex("user:" + userId + ":token", 60 * 60 * 2, token);
         jedis.close();
@@ -73,7 +75,16 @@ public class UserServiceImpl implements UserService {
         return user;
     }
 
+    @Override
+    public UserReceiveAddress getReceiveAddressById(String receiveAddress) {
+        UserReceiveAddress userReceiveAddress = new UserReceiveAddress();
+        userReceiveAddress.setId(receiveAddress);
+
+        return userReceiveAddressMapper.selectOne(userReceiveAddress);
+    }
+
     private User loginFromDb(User user) {
+        System.err.println("login from db");
         List<User> userList = userMapper.select(user);
         if(userList!=null){
             return userList.get(0);

@@ -14,7 +14,7 @@ import java.io.Serializable;
 @Builder
 public class UserReceiveAddress implements Serializable {
     @Id
-    private int id;
+    private String id;
     private String userId;
     private String name;
     private String phoneNumber;
@@ -25,11 +25,11 @@ public class UserReceiveAddress implements Serializable {
     private String region;
     private String detailAddress;
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 

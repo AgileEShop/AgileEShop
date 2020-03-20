@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en"  xmlns="http://www.w3.org/1999/xhtml" xmlns:th="http://www.thymeleaf.org">
+	<head>
+		<meta charset="utf-8" />
+		<script src="/js/jquery-3.1.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<title>登录</title>
+	</head>
+	<body>
+		<!--顶部logo-->
+		<header>
+		</header>
+		<!--大图-->
+		<div class="top-3">
+			<div id="sign">
+				<div class="si_cen">
+					<h2 class="act btn1">用户登录</h2>
+				</div>
+				<div class="si_bom1 tab" style="display: block;">
+					<div  class="error">
+						请输入账户名和密码
+					</div>
+					<form id="loginForm" action="./login" method="post">
+					<ul>
+						<li class="top_1">
+							<input type="text" id="username" name="username" placeholder=" 邮箱/用户名/已验证手机"  class="user"/>
+						</li>
+						<li>
+							<input type="password" id="password" name="password" placeholder=" 密码" class="password"/>
+						</li>
+						<li class="ent"><button id="btn2" type="button" class="btn2"><a href="javascript:submitLogin();" class="a">登 &nbsp; &nbsp;录</a></button></li>
+					</ul>
+						<input type="hidden" id="originUrl" name="originUrl" th:value="${originUrl}"/>
+					</form>
+				</div>
+			<div class="si_out">
+				<h5 class="rig">
+						<span><a href="#">立即注册</a></span>
+					</h5>
+			</div>
+			</div>
+		</div>
+		<!--底部-->
+		 <input type="text" th:value="${ReturnUrl}" id="ReturnUrl" />
+	</body>
+	<script language="JavaScript">
+		
+			function submitLogin() {
+				var username = $("#username").val();
+                var password = $("#password").val();
+                $.post("login",{username:username,password:password},function(token){
+                    if(token=="fail"){
+						alert("用户名或者密码错误");
+					}else{
+                        // 验证token是否为空或者异常
+                        window.location.href=$("#ReturnUrl").val()+"?token="+token;
+					}
+				});
+            }
+
+			
+			var btn2=document.getElementsByClassName('btn2')[0];
+			var user=document.getElementsByClassName('user')[0];
+			var pass=document.getElementsByClassName('password')[0];
+			var err=document.getElementsByClassName('error')[0];
+
+			var err_img1=document.getElementsByClassName('err_img1')[0];
+
+			var err_img2=document.getElementsByClassName('err_img2')[0];
+		 
+			
+			
+			
+			
+			 user.onfocus=function(){
+                 
+                user.style.border='1px solid #999';
+
+		 }
+
+            pass.onfocus=function(){
+                
+                pass.style.border='1px solid #999';
+            }
+            user.onblur=function(){
+                 
+                user.style.border='1px solid green';
+            }
+            pass.onblur=function(){
+                
+                pass.style.border='1px solid green';
+            }
+	</script>
+</html>
