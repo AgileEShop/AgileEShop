@@ -24,13 +24,13 @@ public class CartServiceImpl implements CartService {
     CartItemMapper omsCartItemMapper;
 
     @Override
-    public CartItem ifCartExistByUser(String memberId, String skuId) {
+    public CartItem ifCartExistByUser(String userId, String skuId) {
 
         CartItem cartItem = new CartItem();
-        cartItem.setUserId(memberId);
+        cartItem.setUserId(userId);
         cartItem.setProductId(skuId);
-        CartItem omsCartItem1 = omsCartItemMapper.selectOne(cartItem);
-        return omsCartItem1;
+        CartItem cartItem1 = omsCartItemMapper.selectOne(cartItem);
+        return cartItem1;
 
     }
 

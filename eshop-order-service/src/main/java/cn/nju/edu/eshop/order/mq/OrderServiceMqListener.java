@@ -20,10 +20,10 @@ public class OrderServiceMqListener {
         // 更新订单状态业务
         System.out.println(out_trade_no);
 
-        Order omsOrder = new Order();
-        omsOrder.setOrderSn(out_trade_no);
+        Order order = new Order();
+        order.setOrderSn(out_trade_no);
 
-        orderService.updateOrder(omsOrder);
+        orderService.updateOrder(order);
 
         System.out.println("11111111111111");
     }
