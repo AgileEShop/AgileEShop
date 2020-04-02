@@ -56,11 +56,11 @@ OrderService orderService;
             Order order = new Order();
             order.setAutoConfirmDay(7);
             order.setCreateTime(new Date());
-            //omsOrder.setFreightAmount(); 运费，支付后，在生成物流信息时
+            //order.setFreightAmount(); 运费，支付后，在生成物流信息时
             order.setUserId(userId);
             order.setUsername(nickname);
             order.setNote("快点发货");
-            String outTradeNo = "gmall";
+            String outTradeNo = "agileeshop";
             outTradeNo = outTradeNo + System.currentTimeMillis();// 将毫秒时间戳拼接到外部订单号
             SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDDHHmmss");
             outTradeNo = outTradeNo + sdf.format(new Date());// 将时间字符串拼接到外部订单号
@@ -120,7 +120,7 @@ OrderService orderService;
 
 
             // 重定向到支付系统
-            ModelAndView mv = new ModelAndView("redirect:http://payment.gmall.com:8087/index");
+            ModelAndView mv = new ModelAndView("redirect:http://localhost:8087/index");
             mv.addObject("outTradeNo",outTradeNo);
             mv.addObject("totalAmount",totalAmount);
             return mv;
@@ -148,7 +148,7 @@ OrderService orderService;
         List<OrderItem> orderItems = new ArrayList<>();
 
         for (CartItem cartItem : cartItems) {
-            // 每循环一个购物车对象，就封装一个商品的详情到OmsOrderItem
+            // 每循环一个购物车对象，就封装一个商品的详情到orderItem
             if (cartItem.getIsChecked().equals("1")) {
                 OrderItem orderItem = new OrderItem();
                 orderItem.setProductTitle(cartItem.getProductTitle());
@@ -157,7 +157,7 @@ OrderService orderService;
             }
         }
 
-        modelMap.put("omsOrderItems", orderItems);
+        modelMap.put("orderItems", orderItems);
         modelMap.put("userAddressList", userReceiveAddresses);
         modelMap.put("totalAmount", getTotalAmount(cartItems));
 
@@ -168,13 +168,13 @@ OrderService orderService;
     }
 
 
-    private BigDecimal getTotalAmount(List<CartItem> omsCartItems) {
+    private BigDecimal getTotalAmount(List<CartItem> cartItems) {
         BigDecimal totalAmount = new BigDecimal("0");
 
-        for (CartItem omsCartItem : omsCartItems) {
-            BigDecimal totalPrice = omsCartItem.getTotalPrice();
+        for (CartItem cartItem : cartItems) {
+            BigDecimal totalPrice = cartItem.getTotalPrice();
 
-            if (omsCartItem.getIsChecked().equals("1")) {
+            if (cartItem.getIsChecked().equals("1")) {
                 totalAmount = totalAmount.add(totalPrice);
             }
         }

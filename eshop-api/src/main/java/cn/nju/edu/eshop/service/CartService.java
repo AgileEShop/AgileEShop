@@ -5,7 +5,7 @@ import cn.nju.edu.eshop.bean.CartItem;
 import java.util.List;
 
 public interface CartService {
-    CartItem ifCartExistByUser(String userId, String skuId);
+    CartItem ifCartExistByUser(String userId, String productId);
 
     void addCart(CartItem cartItem);
 

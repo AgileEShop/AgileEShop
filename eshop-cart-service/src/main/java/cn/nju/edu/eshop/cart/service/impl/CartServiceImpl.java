@@ -21,54 +21,54 @@ public class CartServiceImpl implements CartService {
     RedisUtil redisUtil;
 
     @Autowired
-    CartItemMapper omsCartItemMapper;
+    CartItemMapper cartItemMapper;
 
     @Override
-    public CartItem ifCartExistByUser(String userId, String skuId) {
+    public CartItem ifCartExistByUser(String userId, String productId) {
 
         CartItem cartItem = new CartItem();
         cartItem.setUserId(userId);
-        cartItem.setProductId(skuId);
-        CartItem cartItem1 = omsCartItemMapper.selectOne(cartItem);
+        cartItem.setProductId(productId);
+        CartItem cartItem1 = cartItemMapper.selectOne(cartItem);
         return cartItem1;
 
     }
 
     @Override
-    public void addCart(CartItem omsCartItem) {
-        if (StringUtils.isNotBlank(omsCartItem.getUserId())) {
-            omsCartItemMapper.insertSelective(omsCartItem);//避免添加空值
+    public void addCart(CartItem cartItem) {
+        if (StringUtils.isNotBlank(cartItem.getUserId())) {
+            cartItemMapper.insertSelective(cartItem);//避免添加空值
         }
     }
 
     @Override
-    public void updateCart(CartItem omsCartItemFromDb) {
+    public void updateCart(CartItem cartItemFromDb) {
 
         Example e = new Example(CartItem.class);
-        e.createCriteria().andEqualTo("id",omsCartItemFromDb.getId());
+        e.createCriteria().andEqualTo("id",cartItemFromDb.getId());
 
-        omsCartItemMapper.updateByExampleSelective(omsCartItemFromDb,e);
+        cartItemMapper.updateByExampleSelective(cartItemFromDb,e);
 
     }
 
     @Override
-    public void flushCartCache(String memberId) {
+    public void flushCartCache(String userId) {
 
-        CartItem omsCartItem = new CartItem();
-        omsCartItem.setUserId(memberId);
-        List<CartItem> omsCartItems = omsCartItemMapper.select(omsCartItem);
+        CartItem cartItem1 = new CartItem();
+        cartItem1.setUserId(userId);
+        List<CartItem> cartItems = cartItemMapper.select(cartItem1);
 
         // 同步到redis缓存中
         Jedis jedis = redisUtil.getJedis();
 
         Map<String,String> map = new HashMap<>();
-        for (CartItem cartItem : omsCartItems) {
+        for (CartItem cartItem : cartItems) {
             cartItem.setTotalPrice(cartItem.getPrice().multiply(cartItem.getQuantity()));
             map.put(cartItem.getProductId(), JSON.toJSONString(cartItem));
         }
 
-        jedis.del("user:"+memberId+":cart");
-        jedis.hmset("user:"+memberId+":cart",map);
+        jedis.del("user:"+userId+":cart");
+        jedis.hmset("user:"+userId+":cart",map);
 
         jedis.close();
     }
@@ -105,9 +105,9 @@ public class CartServiceImpl implements CartService {
 
         Example e = new Example(CartItem.class);
 
-        e.createCriteria().andEqualTo("memberId",cartItem.getUserId()).andEqualTo("productSkuId",cartItem.getProductId());
+        e.createCriteria().andEqualTo("userId",cartItem.getUserId()).andEqualTo("productId",cartItem.getProductId());
 
-        omsCartItemMapper.updateByExampleSelective(cartItem,e);
+        cartItemMapper.updateByExampleSelective(cartItem,e);
 
         // 缓存同步
         flushCartCache(cartItem.getUserId());

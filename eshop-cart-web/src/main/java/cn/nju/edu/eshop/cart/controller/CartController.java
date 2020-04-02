@@ -32,20 +32,20 @@ public class CartController {
 
     @RequestMapping("checkCart")
     @LoginRequired(loginSuccess = false)
-    public String checkCart(String isChecked, String skuId, HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap) {
+    public String checkCart(String isChecked, String productId, HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap) {
 
-        String memberId = (String)request.getAttribute("memberId");
+        String userId = (String)request.getAttribute("userId");
         String nickname = (String)request.getAttribute("nickname");
 
         // 调用服务，修改状态
         CartItem cartItem = new CartItem();
-        cartItem.setUserId(memberId);
-        cartItem.setProductId(skuId);
+        cartItem.setUserId(userId);
+        cartItem.setProductId(productId);
         cartItem.setIsChecked(isChecked);
         cartService.checkCart(cartItem);
 
         // 将最新的数据从缓存中查出，渲染给内嵌页
-        List<CartItem> cartItems = cartService.cartList(memberId);
+        List<CartItem> cartItems = cartService.cartList(userId);
         modelMap.put("cartList",cartItems);
 
         // 被勾选商品的总额
@@ -121,11 +121,11 @@ public class CartController {
 
 
         // 判断用户是否登录
-        String memberId = (String)request.getAttribute("memberId");
+        String userId = (String)request.getAttribute("userId");
         String nickname = (String)request.getAttribute("nickname");
 
 
-        if (StringUtils.isBlank(memberId)) {
+        if (StringUtils.isBlank(userId)) {
             // 用户没有登录
 
             // cookie里原有的购物车数据
@@ -156,23 +156,23 @@ public class CartController {
         } else {
             // 用户已经登录
             // 从db中查出购物车数据
-            CartItem omsCartItemFromDb = cartService.ifCartExistByUser(memberId,productId);
+            CartItem cartItemFromDb = cartService.ifCartExistByUser(userId,productId);
 
-            if(omsCartItemFromDb==null){
+            if(cartItemFromDb==null){
                 // 该用户没有添加过当前商品
-                cartItem1.setUserId(memberId);
+                cartItem1.setUserId(userId);
                 cartItem1.setUserNickname("test小明");
                 cartItem1.setQuantity(new BigDecimal(quantity));
                 cartService.addCart(cartItem1);
 
             }else{
                 // 该用户添加过当前商品
-                omsCartItemFromDb.setQuantity(omsCartItemFromDb.getQuantity().add(cartItem1.getQuantity()));
-                cartService.updateCart(omsCartItemFromDb);
+                cartItemFromDb.setQuantity(cartItemFromDb.getQuantity().add(cartItem1.getQuantity()));
+                cartService.updateCart(cartItemFromDb);
             }
 
             // 同步缓存
-            cartService.flushCartCache(memberId);
+            cartService.flushCartCache(userId);
         }
 
 
@@ -184,9 +184,9 @@ public class CartController {
         boolean b = false;
 
         for (CartItem cartItem : omsCartItems) {
-            String productSkuId = cartItem.getProductId();
+            String productId = cartItem.getProductId();
 
-            if (productSkuId.equals(omsCartItem.getProductId())) {
+            if (productId.equals(omsCartItem.getProductId())) {
                 b = true;
             }
         }
