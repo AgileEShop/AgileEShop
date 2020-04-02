@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Controller
@@ -23,7 +24,7 @@ public class ItemController {
     public String item(@PathVariable String productId, ModelMap map, HttpServletRequest request){
 //        String remoteAddr = request.getRemoteAddr(); //没有用nginx负载均衡的算法，获取用户的IP地址
 //        String header = request.getHeader("");//使用nginx负载均衡的算法，获取用户的IP地址
-        System.err.waaaprintln("productId"+productId);
+        System.err.println("productId:"+productId);
         Product product = productService.getProductById(productId);
         ProductVO productVO = new ProductVO();
         productVO.setId(product.getId());
@@ -38,9 +39,7 @@ public class ItemController {
         String[] imgUrls = urls.split(",");
         List<String>imageUrls = new ArrayList<>();
         productVO.setDefaultImageUrl(imgUrls[0]);
-        for(int i = 1;i<imgUrls.length;i++){
-            imageUrls.add(imgUrls[i]);
-        }
+        imageUrls.addAll(Arrays.asList(imgUrls));
         productVO.setImageUrls(imageUrls);
         System.err.println("toString:"+product.toString());
         map.put("productVO",productVO);
