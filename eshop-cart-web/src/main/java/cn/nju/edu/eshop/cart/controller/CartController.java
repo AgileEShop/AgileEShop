@@ -102,8 +102,8 @@ public class CartController {
     @LoginRequired(loginSuccess = false)
     public String addToCart(String productId, int quantity, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
         System.err.println("add to cart");
-        List<CartItem> cartItems = new ArrayList<>();
 
+        List<CartItem> cartItems = new ArrayList<>();
         // 调用商品服务查询商品信息
         Product productInfo = productService.getProductById(productId);
 
@@ -177,7 +177,7 @@ public class CartController {
         }
 
 
-        return "redirect:http://localhost:7084/success";
+        return "addToCart";
     }
 
     private boolean if_cart_exist(List<CartItem> omsCartItems, CartItem omsCartItem) {
