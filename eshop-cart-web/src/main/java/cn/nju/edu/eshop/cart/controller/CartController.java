@@ -61,6 +61,7 @@ public class CartController {
         List<CartItem> cartItems = new ArrayList<>();
         String userId = (String)request.getAttribute("userId");
         String nickname = (String)request.getAttribute("nickname");
+        System.err.println("userId:"+userId+" + "+"nickname:"+nickname);
 
         if(StringUtils.isNotBlank(userId)){
             // 已经登录查询db
@@ -73,8 +74,9 @@ public class CartController {
             }
         }
 
-        for (CartItem omsCartItem : cartItems) {
-            omsCartItem.setTotalPrice(omsCartItem.getPrice().multiply(omsCartItem.getQuantity()));
+        for (CartItem cartItem : cartItems) {
+            cartItem.setTotalPrice(cartItem.getPrice().multiply(cartItem.getQuantity()));
+            System.err.println("cartItem:"+cartItem.toString());
         }
 
         modelMap.put("cartList",cartItems);
@@ -89,10 +91,9 @@ public class CartController {
 
         for (CartItem cartItem : cartItems) {
             BigDecimal totalPrice = cartItem.getTotalPrice();
-
-            if(cartItem.getIsChecked().equals("1")){
+//            if(cartItem.getIsChecked().equals("1")){
                 totalAmount = totalAmount.add(totalPrice);
-            }
+//            }
         }
 
         return totalAmount;

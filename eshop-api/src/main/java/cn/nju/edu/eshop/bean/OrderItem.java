@@ -1,18 +1,33 @@
 package cn.nju.edu.eshop.bean;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
 public class OrderItem implements Serializable {
+    @Id
+    @Column
     private String id;
+    @Column
     private String orderId;
+    @Column
     private String orderSn;
+    @Column
     private String productId;
+    @Column
     private String productPic;
+    @Column
     private String productTitle;
+    @Column
     private BigDecimal productPrice;
+    @Column
     private BigDecimal productQuantity;
+    @Column
     private String productCatalog2Id;
+    @Column
     private BigDecimal realAmount;
 
     public String getId() {

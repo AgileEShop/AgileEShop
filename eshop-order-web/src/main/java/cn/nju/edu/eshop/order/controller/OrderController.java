@@ -116,6 +116,7 @@ OrderService orderService;
 
             // 将订单和订单详情写入数据库
             // 删除购物车的对应商品
+            System.err.println("order:"+order.toString());
             orderService.saveOrder(order);
 
 

@@ -5,24 +5,38 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import javax.persistence.Column;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import java.io.Serializable;
 
-@Data
-@NoArgsConstructor
-@AllArgsConstructor
-@Builder
+//@Data
+//@NoArgsConstructor
+//@AllArgsConstructor
+//@Builder
 public class UserReceiveAddress implements Serializable {
     @Id
+    @Column
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private String id;
+    @Column
     private String userId;
+    @Column
     private String name;
+    @Column
     private String phoneNumber;
+    @Column
     private int defaultStatus;
+    @Column
     private String postCode;
+    @Column
     private String province;
+    @Column
     private String city;
+    @Column
     private String region;
+    @Column
     private String detailAddress;
 
     public String getId() {

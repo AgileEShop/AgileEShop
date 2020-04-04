@@ -34,6 +34,7 @@ public class UserServiceImpl implements UserService {
     @Override
     public List<UserReceiveAddress> getReceiveAddressByUserId(String userId) {
         UserReceiveAddress userReceiveAddress = new UserReceiveAddress();
+        System.err.println("userId:"+userId);
         userReceiveAddress.setUserId(userId);
         return userReceiveAddressMapper.select(userReceiveAddress);
     }
