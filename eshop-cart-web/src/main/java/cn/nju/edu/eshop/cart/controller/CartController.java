@@ -54,10 +54,10 @@ public class CartController {
         return "cartListInner";
     }
 
-    @RequestMapping("cartList")
+    @RequestMapping("cartList")/*购物车订单页面*/
     @LoginRequired(loginSuccess = false)
     public String cartList(HttpServletRequest request, HttpServletResponse response, HttpSession session, ModelMap modelMap) {
-
+        /*判断用户是否登录*/
         List<CartItem> cartItems = new ArrayList<>();
         String userId = (String)request.getAttribute("userId");
         String nickname = (String)request.getAttribute("nickname");
@@ -101,6 +101,7 @@ public class CartController {
     @RequestMapping("addToCart")
     @LoginRequired(loginSuccess = false)
     public String addToCart(String productId, int quantity, HttpServletRequest request, HttpServletResponse response, HttpSession session) {
+        System.err.println("add to cart");
         List<CartItem> cartItems = new ArrayList<>();
 
         // 调用商品服务查询商品信息
@@ -118,7 +119,7 @@ public class CartController {
         cartItem1.setProductPic(productInfo.getUrls());
         cartItem1.setProductId(productId);
         cartItem1.setQuantity(new BigDecimal(quantity));
-
+        System.err.println("商品："+cartItem1.toString());
 
         // 判断用户是否登录
         String userId = (String)request.getAttribute("userId");
@@ -176,7 +177,7 @@ public class CartController {
         }
 
 
-        return "redirect:/success.html";
+        return "redirect:http://localhost:7084/success";
     }
 
     private boolean if_cart_exist(List<CartItem> omsCartItems, CartItem omsCartItem) {
