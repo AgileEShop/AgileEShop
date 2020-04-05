@@ -47,7 +47,7 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-maven-plugin</artifactId>
                 <configuration>
-                    <mainClass>cn.nju.edu.eshop.item.EshopItemWebApplication</mainClass>
+                    <mainClass>cn.nju.edu.eshop.EshopItemWebApplication</mainClass>
                     <layout>ZIP</layout>
                 </configuration>
                 <executions>
