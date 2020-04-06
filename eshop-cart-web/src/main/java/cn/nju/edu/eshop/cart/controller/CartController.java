@@ -176,7 +176,8 @@ public class CartController {
             // 同步缓存
             cartService.flushCartCache(userId);
         }
-
+        // 同步缓存
+//        cartService.flushCartCache(userId);
 
         return "addToCart";
     }

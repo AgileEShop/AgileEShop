@@ -145,11 +145,12 @@ OrderService orderService;
 
         // 将购物车集合转化为页面计算清单集合
         List<CartItem> cartItems = cartService.cartList(userId);
-
+        System.err.println("cartitems:"+cartItems.size());
         List<OrderItem> orderItems = new ArrayList<>();
 
         for (CartItem cartItem : cartItems) {
             // 每循环一个购物车对象，就封装一个商品的详情到orderItem
+            System.err.println("cartitem:"+cartItem.toString());
             if (cartItem.getIsChecked().equals("1")) {
                 OrderItem orderItem = new OrderItem();
                 orderItem.setProductTitle(cartItem.getProductTitle());

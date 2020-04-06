@@ -29,8 +29,7 @@ public class CartServiceImpl implements CartService {
         CartItem cartItem = new CartItem();
         cartItem.setUserId(userId);
         cartItem.setProductId(productId);
-        CartItem cartItem1 = cartItemMapper.selectOne(cartItem);
-        return cartItem1;
+        return cartItemMapper.selectOne(cartItem);
 
     }
 
