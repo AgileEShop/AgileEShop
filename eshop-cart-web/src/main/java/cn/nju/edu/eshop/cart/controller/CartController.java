@@ -159,20 +159,17 @@ public class CartController {
             // 用户已经登录
             // 从db中查出购物车数据
             CartItem cartItemFromDb = cartService.ifCartExistByUser(userId,productId);
-
             if(cartItemFromDb==null){
                 // 该用户没有添加过当前商品
                 cartItem1.setUserId(userId);
                 cartItem1.setUserNickname("test小明");
                 cartItem1.setQuantity(new BigDecimal(quantity));
                 cartService.addCart(cartItem1);
-
             }else{
                 // 该用户添加过当前商品
                 cartItemFromDb.setQuantity(cartItemFromDb.getQuantity().add(cartItem1.getQuantity()));
                 cartService.updateCart(cartItemFromDb);
             }
-
             // 同步缓存
             cartService.flushCartCache(userId);
         }
