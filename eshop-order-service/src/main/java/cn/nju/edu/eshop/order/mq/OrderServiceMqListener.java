@@ -1,6 +1,6 @@
 package cn.nju.edu.eshop.order.mq;
 
-import cn.nju.edu.eshop.bean.Order;
+import cn.nju.edu.eshop.bean.Orders;
 import cn.nju.edu.eshop.service.OrderService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.jms.annotation.JmsListener;
@@ -20,10 +20,10 @@ public class OrderServiceMqListener {
         // 更新订单状态业务
         System.out.println(out_trade_no);
 
-        Order order = new Order();
-        order.setOrderSn(out_trade_no);
+        Orders orders = new Orders();
+        orders.setOrderSn(out_trade_no);
 
-        orderService.updateOrder(order);
+        orderService.updateOrder(orders);
 
         System.out.println("11111111111111");
     }

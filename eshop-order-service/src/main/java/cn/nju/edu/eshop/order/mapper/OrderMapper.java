@@ -1,7 +1,7 @@
 package cn.nju.edu.eshop.order.mapper;
 
-import cn.nju.edu.eshop.bean.Order;
+import cn.nju.edu.eshop.bean.Orders;
 import tk.mybatis.mapper.common.Mapper;
 
-public interface OrderMapper extends Mapper<Order> {
+public interface OrderMapper extends Mapper<Orders> {
 }

@@ -1,8 +1,7 @@
 package cn.nju.edu.eshop.order.service.impl;
 
-import cn.nju.edu.eshop.bean.Order;
+import cn.nju.edu.eshop.bean.Orders;
 import cn.nju.edu.eshop.bean.OrderItem;
-import cn.nju.edu.eshop.bean.Product;
 import cn.nju.edu.eshop.mq.ActiveMQUtil;
 import cn.nju.edu.eshop.order.mapper.OrderItemMapper;
 import cn.nju.edu.eshop.order.mapper.OrderMapper;
@@ -75,12 +74,12 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public void saveOrder(Order order) {
+    public void saveOrder(Orders orders) {
         // 保存订单表
-        orderMapper.insertSelective(order);
-        String orderId = order.getId();
+        orderMapper.insertSelective(orders);
+        String orderId = orders.getId();
         // 保存订单详情
-        List<OrderItem> orderItemList = order.getOrderItemList();
+        List<OrderItem> orderItemList = orders.getOrderItemList();
         for (OrderItem orderItem : orderItemList) {
             orderItem.setOrderId(orderId);
             orderItemMapper.insertSelective(orderItem);
@@ -90,19 +89,18 @@ public class OrderServiceImpl implements OrderService {
     }
 
     @Override
-    public Order getOrderByOutTradeNo(String outTradeNo) {
-        Order order = new Order();
-        order.setOrderSn(outTradeNo);
-        Order order1 = orderMapper.selectOne(order);
-        return order1;
+    public Orders getOrderByOutTradeNo(String outTradeNo) {
+        Orders orders = new Orders();
+        orders.setOrderSn(outTradeNo);
+        return orderMapper.selectOne(orders);
     }
 
     @Override
-    public void updateOrder(Order order) {
-        Example e = new Example(Order.class);
-        e.createCriteria().andEqualTo("orderSn", order.getOrderSn());
-        Order orderUpdate = new Order();
-        orderUpdate.setStatus("1");
+    public void updateOrder(Orders orders) {
+        Example e = new Example(Orders.class);
+        e.createCriteria().andEqualTo("orderSn", orders.getOrderSn());
+        Orders ordersUpdate = new Orders();
+        ordersUpdate.setStatus("1");
         // 发送一个订单已支付的队列，提供给库存消费
         Connection connection = null;
         Session session = null;
@@ -115,17 +113,17 @@ public class OrderServiceImpl implements OrderService {
             //MapMessage mapMessage = new ActiveMQMapMessage();// hash结构
 
             // 查询订单的对象，转化成json字符串，存入ORDER_PAY_QUEUE的消息队列
-            Order orderParam = new Order();
-            orderParam.setOrderSn(order.getOrderSn());
-            Order orderResponse = orderMapper.selectOne(orderParam);
+            Orders ordersParam = new Orders();
+            ordersParam.setOrderSn(orders.getOrderSn());
+            Orders ordersResponse = orderMapper.selectOne(ordersParam);
 
             OrderItem orderItemParam = new OrderItem();
-            orderItemParam.setOrderSn(orderParam.getOrderSn());
+            orderItemParam.setOrderSn(ordersParam.getOrderSn());
             List<OrderItem> select = orderItemMapper.select(orderItemParam);
-            orderResponse.setOrderItemList(select);
-            textMessage.setText(JSON.toJSONString(orderResponse));
+            ordersResponse.setOrderItemList(select);
+            textMessage.setText(JSON.toJSONString(ordersResponse));
 
-            orderMapper.updateByExampleSelective(orderUpdate,e);
+            orderMapper.updateByExampleSelective(ordersUpdate,e);
             producer.send(textMessage);
             session.commit();
         }catch (Exception ex){
