@@ -1,32 +1,19 @@
-package cn.nju.edu.eshop.user;
+package cn.nju.edu.eshop.service;
 
-import cn.nju.edu.eshop.EshopUserServiceApplication;
 import cn.nju.edu.eshop.bean.User;
-import cn.nju.edu.eshop.user.service.impl.UserServiceImpl;
-import org.junit.Before;
+import cn.nju.edu.eshop.order.controller.OrderController;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.runner.RunWith;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.context.web.WebAppConfiguration;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@SpringBootTest(classes = EshopUserServiceApplication.class)
-@WebAppConfiguration
-class EshopUserServiceApplicationTests {
+import java.math.BigDecimal;
 
-    private UserServiceImpl userService;
+import static org.junit.jupiter.api.Assertions.*;
 
-    @Before
-    public void setup() {
-        this.userService = new UserServiceImpl();// 获取mockMvc实例
-    }
-
-    @Test
-    void contextLoads() {
-    }
+class UserServiceTest {
+    @Autowired
+    UserService userService;
 
     @BeforeEach
     void setUp() {
@@ -68,4 +55,5 @@ class EshopUserServiceApplicationTests {
     void getReceiveAddressById() {
         userService.getReceiveAddressByUserId("feng");
     }
+
 }
