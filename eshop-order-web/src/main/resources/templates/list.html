@@ -101,7 +101,7 @@
 
           <table class="table" th:each="orderInfo:${orderList}">
             <tr>
-              <td colspan="7" style="background:#F7F7F7"  class="order-header" >
+              <td colspan="7" style="background:#F7F7F7"  class="orders-header" >
                 <span style="color:#AAAAAA" text="2018-04-22 19:33:00"> </span>
                 <span><ruby style="color:#AAAAAA">订单号:</ruby><span  text=""></span>  </span>
                 <span>状态 </span>
@@ -175,7 +175,7 @@
            <!--  <span th:if="${orderInfo.orderStatus.toString()=='SPLIT'}" th:each="subOrderInfo,state:${orderInfo.orderSubList}">
 
             <tr>
-              <td colspan="7" style="background:#F7F7F7"  class="order-header" >
+              <td colspan="7" style="background:#F7F7F7"  class="orders-header" >
                 <span style="color:#AAAAAA" th:text="${#dates.format(subOrderInfo.createTime,'yyyy-mm-dd HH:MM:SS')}"> </span>
                 <span><ruby style="color:#AAAAAA">子订单号:</ruby><span th:text="${subOrderInfo.id}"></span>  </span>
                 <span th:text="${subOrderInfo.orderStatus.getComment()}">已拆分 </span>
@@ -250,7 +250,7 @@
 
         <table class="table">
           <tr>
-            <td colspan="7" style="background:#F7F7F7"  class="order-header" >
+            <td colspan="7" style="background:#F7F7F7"  class="orders-header" >
               <span style="color:#AAAAAA">2017-12-09 20:50:10</span>
               <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>
               <span>已拆分<i class="table_i"></i></span>
@@ -258,7 +258,7 @@
             </td>
           </tr>
 		  <tr >
-            <td colspan="7" style="background:#F7F7F7"  class="order-header" >
+            <td colspan="7" style="background:#F7F7F7"  class="orders-header" >
               <span style="color:#AAAAAA">2017-12-09 20:50:10</span>
               <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>
               
@@ -318,7 +318,7 @@
             </td>
           </tr>
 		  <tr>
-            <td colspan="7" style="background:#F7F7F7"   class="order-header">
+            <td colspan="7" style="background:#F7F7F7"   class="orders-header">
               <span style="color:#AAAAAA">2017-12-09 20:50:10</span>
               <span><ruby style="color:#AAAAAA">订单号:</ruby> 70207298274</span>
             </td>

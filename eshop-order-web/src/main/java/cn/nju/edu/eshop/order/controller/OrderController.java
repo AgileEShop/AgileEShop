@@ -2,7 +2,7 @@ package cn.nju.edu.eshop.order.controller;
 
 import cn.nju.edu.eshop.annotations.LoginRequired;
 import cn.nju.edu.eshop.bean.CartItem;
-import cn.nju.edu.eshop.bean.Order;
+import cn.nju.edu.eshop.bean.Orders;
 import cn.nju.edu.eshop.bean.OrderItem;
 import cn.nju.edu.eshop.bean.UserReceiveAddress;
 import cn.nju.edu.eshop.service.CartService;
@@ -53,37 +53,37 @@ OrderService orderService;
         if (success.equals("success")) {
             List<OrderItem> orderItems = new ArrayList<>();
             // 订单对象
-            Order order = new Order();
-            order.setAutoConfirmDay(7);
-            order.setCreateTime(new Date());
+            Orders orders = new Orders();
+            orders.setAutoConfirmDay(7);
+            orders.setCreateTime(new Date());
             //order.setFreightAmount(); 运费，支付后，在生成物流信息时
-            order.setUserId(userId);
-            order.setUsername(nickname);
-            order.setNote("快点发货");
+            orders.setUserId(userId);
+            orders.setUsername(nickname);
+            orders.setNote("快点发货");
             String outTradeNo = "agileeshop";
             outTradeNo = outTradeNo + System.currentTimeMillis();// 将毫秒时间戳拼接到外部订单号
             SimpleDateFormat sdf = new SimpleDateFormat("YYYYMMDDHHmmss");
             outTradeNo = outTradeNo + sdf.format(new Date());// 将时间字符串拼接到外部订单号
 
-            order.setOrderSn(outTradeNo);//外部订单号
-            order.setPayAmount(totalAmount);
-            order.setOrderType(1);
+            orders.setOrderSn(outTradeNo);//外部订单号
+            orders.setPayAmount(totalAmount);
+            orders.setOrderType(1);
             UserReceiveAddress userReceiveAddress = userService.getReceiveAddressById(receiveAddressId);
-            order.setReceiverCity(userReceiveAddress.getCity());
-            order.setReceiverDetailAddress(userReceiveAddress.getDetailAddress());
-            order.setReceiverName(userReceiveAddress.getName());
-            order.setReceiverPhone(userReceiveAddress.getPhoneNumber());
-            order.setReceiverPostCode(userReceiveAddress.getPostCode());
-            order.setReceiverProvince(userReceiveAddress.getProvince());
-            order.setReceiverRegion(userReceiveAddress.getRegion());
+            orders.setReceiverCity(userReceiveAddress.getCity());
+            orders.setReceiverDetailAddress(userReceiveAddress.getDetailAddress());
+            orders.setReceiverName(userReceiveAddress.getName());
+            orders.setReceiverPhone(userReceiveAddress.getPhoneNumber());
+            orders.setReceiverPostCode(userReceiveAddress.getPostCode());
+            orders.setReceiverProvince(userReceiveAddress.getProvince());
+            orders.setReceiverRegion(userReceiveAddress.getRegion());
             // 当前日期加一天，一天后配送
             Calendar c = Calendar.getInstance();
             c.add(Calendar.DATE,1);
             Date time = c.getTime();
-            order.setReceiveTime(time);
-            order.setStatus("0");
-            order.setOrderType(0);
-            order.setTotalAmount(totalAmount);
+            orders.setReceiveTime(time);
+            orders.setStatus("0");
+            orders.setOrderType(0);
+            orders.setTotalAmount(totalAmount);
 
             // 根据用户id获得要购买的商品列表(购物车)，和总价格
             List<CartItem> cartItems = cartService.cartList(userId);
@@ -112,16 +112,16 @@ OrderService orderService;
                     orderItems.add(orderItem);
                 }
             }
-            order.setOrderItemList(orderItems);
+            orders.setOrderItemList(orderItems);
 
             // 将订单和订单详情写入数据库
             // 删除购物车的对应商品
-            System.err.println("order:"+order.toString());
-            orderService.saveOrder(order);
+            System.err.println("order:"+ orders.toString());
+            orderService.saveOrder(orders);
 
 
             // 重定向到支付系统
-            ModelAndView mv = new ModelAndView("redirect:http://localhost:8087/index");
+            ModelAndView mv = new ModelAndView("redirect:http://localhost:7087/index");
             mv.addObject("outTradeNo",outTradeNo);
             mv.addObject("totalAmount",totalAmount);
             return mv;

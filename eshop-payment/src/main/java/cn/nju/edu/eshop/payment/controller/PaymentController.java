@@ -1,13 +1,13 @@
 package cn.nju.edu.eshop.payment.controller;
 
 
+import cn.nju.edu.eshop.bean.Orders;
 import com.alibaba.dubbo.config.annotation.Reference;
 import com.alibaba.fastjson.JSON;
 import com.alipay.api.AlipayApiException;
 import com.alipay.api.AlipayClient;
 import com.alipay.api.request.AlipayTradePagePayRequest;
 import cn.nju.edu.eshop.annotations.LoginRequired;
-import cn.nju.edu.eshop.bean.Order;
 import cn.nju.edu.eshop.bean.PaymentInfo;
 import cn.nju.edu.eshop.payment.config.AlipayConfig;
 import cn.nju.edu.eshop.service.OrderService;
@@ -83,12 +83,12 @@ public class PaymentController {
         // 回调函数
         alipayRequest.setReturnUrl(AlipayConfig.return_payment_url);
         alipayRequest.setNotifyUrl(AlipayConfig.notify_payment_url);
-
+        Orders orders = orderService.getOrderByOutTradeNo(outTradeNo);
         Map<String,Object> map = new HashMap<>();
         map.put("out_trade_no",outTradeNo);
         map.put("product_code","FAST_INSTANT_TRADE_PAY");
         map.put("total_amount",0.01);
-        map.put("subject","尚硅谷感光徕卡Pro300瞎命名系列手机");
+        map.put("subject","连衣裙");
 
         String param = JSON.toJSONString(map);
 
@@ -102,13 +102,13 @@ public class PaymentController {
         }
 
         // 生成并且保存用户的支付信息
-        Order order = orderService.getOrderByOutTradeNo(outTradeNo);
+//        Orders orders = orderService.getOrderByOutTradeNo(outTradeNo);
         PaymentInfo paymentInfo = new PaymentInfo();
         paymentInfo.setCreateTime(new Date());
-        paymentInfo.setOrderId(order.getId());
+        paymentInfo.setOrderId(orders.getId());
         paymentInfo.setOrderSn(outTradeNo);
         paymentInfo.setPaymentStatus("未付款");
-        paymentInfo.setSubject("谷粒商城商品一件");
+        paymentInfo.setSubject("agileeshop商品");
         paymentInfo.setTotalAmount(totalAmount);
         paymentService.savePaymentInfo(paymentInfo);
 
@@ -122,7 +122,7 @@ public class PaymentController {
     @RequestMapping("index")
     @LoginRequired(loginSuccess = true)
     public String index(String outTradeNo, BigDecimal totalAmount, HttpServletRequest request, ModelMap modelMap){
-        String memberId = (String)request.getAttribute("memberId");
+        String userId = (String)request.getAttribute("userId");
         String nickname = (String)request.getAttribute("nickname");
 
         modelMap.put("nickname",nickname);

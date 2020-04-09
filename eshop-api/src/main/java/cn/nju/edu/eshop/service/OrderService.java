@@ -1,15 +1,15 @@
 package cn.nju.edu.eshop.service;
 
-import cn.nju.edu.eshop.bean.Order;
+import cn.nju.edu.eshop.bean.Orders;
 
 public interface OrderService {
     String checkTradeCode(String userId, String tradeCode);
 
     String genTradeCode(String userId);
 
-    void saveOrder(Order order);
+    void saveOrder(Orders orders);
 
-    Order getOrderByOutTradeNo(String outTradeNo);
+    Orders getOrderByOutTradeNo(String outTradeNo);
 
-    void updateOrder(Order order);
+    void updateOrder(Orders orders);
 }

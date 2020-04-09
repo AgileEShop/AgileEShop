@@ -8,9 +8,9 @@
         <version>1.0-SNAPSHOT</version>
         <relativePath>../eshop-parent/pom.xml</relativePath>
     </parent>
-    <artifactId>eshop-order-service</artifactId>
+    <artifactId>eshop-orders-service</artifactId>
     <version>0.0.1-SNAPSHOT</version>
-    <name>eshop-order-service</name>
+    <name>eshop-orders-service</name>
     <description>Demo project for Spring Boot</description>
 
     <properties>
